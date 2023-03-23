@@ -7,43 +7,61 @@ import java.util.*;
 import util.DBUtil;
 
 public class Cash {
-	/*
-	SELECT c.cash_no cashNo
-		, c.cash_date cashDate
-		, c.cash_price cashPrice
-		, c.category_no categoryNo
-		, ct.category_kind categoryKind
-		, ct.category_name categoryName
-	FROM cash c INNER JOIN category ct ON c.category_no = ct.category_no 
-	WHERE YEAR(c.cash_date) = ? AND MONTH(c.cash_date) = ?
-	ORDER BY c.cash_date;
-	*/
-	// 조인 사용 --> HashMap
-	public ArrayList<HashMap<String, Object>> selectCashListByMonyh(int year, int month) throws Exception{
-		ArrayList<HashMap<String, Object>> list = new  ArrayList<HashMap<String, Object>>();
-		DBUtil dbUtil = new DBUtil();
-		Connection conn = dbUtil.getConnection();
-		String sql ="SELECT c.cash_no cashNo, c.cash_date cashDate, c.cash_price cashPrice, c.category_no categoryNo, ct.category_kind categoryKind, ct.category_name categoryName FROM cash c INNER JOIN category ct ON c.category_no = ct.category_no WHERE YEAR(c.cash_date) = ? AND MONTH(c.cash_date) = ? ORDER BY c.cash_date;";
-		PreparedStatement stmt = conn.prepareStatement(sql);
-		stmt.setInt(1, year);
-		stmt.setInt(2, month);
-		
-		ResultSet rs = stmt.executeQuery();
-		while(rs.next()) {
-			HashMap<String, Object> m = new HashMap<>();
-			// hashMap에 데이터 넣기
-			m.put("cashNo", rs.getInt("cashNo"));
-			m.put("cashDate", rs.getString("cashDate"));
-			m.put("cashPrice", rs.getString("cashPrice"));
-			m.put("categoryNo", rs.getString("categoryNo"));
-			m.put("categoryKind", rs.getString("categoryKind"));
-			m.put("categoryName", rs.getString("categoryName"));
-			list.add(m);	// list에 데이터 넣기
-		}
-		
-		rs.close();
-		stmt.close();
-		conn.close();
-		return list;
+	private int cashNo;
+	private String categoryNo;
+	private String memberId;
+	private String cashDate;
+	private String cashPrice;
+	private String cashMemo;
+	private String upadatedate;
+	private String createdate;
+	public int getCashNo() {
+		return cashNo;
 	}
+	public void setCashNo(int cashNo) {
+		this.cashNo = cashNo;
+	}
+	public String getCategoryNo() {
+		return categoryNo;
+	}
+	public void setCategoryNo(String categoryNo) {
+		this.categoryNo = categoryNo;
+	}
+	public String getMemberId() {
+		return memberId;
+	}
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
+	}
+	public String getCashDate() {
+		return cashDate;
+	}
+	public void setCashDate(String cashDate) {
+		this.cashDate = cashDate;
+	}
+	public String getCashPrice() {
+		return cashPrice;
+	}
+	public void setCashPrice(String cashPrice) {
+		this.cashPrice = cashPrice;
+	}
+	public String getCashMemo() {
+		return cashMemo;
+	}
+	public void setCashMemo(String cashMemo) {
+		this.cashMemo = cashMemo;
+	}
+	public String getUpadatedate() {
+		return upadatedate;
+	}
+	public void setUpadatedate(String upadatedate) {
+		this.upadatedate = upadatedate;
+	}
+	public String getCreatedate() {
+		return createdate;
+	}
+	public void setCreatedate(String createdate) {
+		this.createdate = createdate;
+	}
+	
 }

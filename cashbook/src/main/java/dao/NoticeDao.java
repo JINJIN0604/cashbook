@@ -105,7 +105,7 @@ public class NoticeDao {
 		return row;		
 	}
 	
-	// UPDATE : noticeList.jsp
+	// UPDATE 
 	public int updateNotice(Notice notice) {
 		int row = 0;
 		Connection conn = null;
@@ -147,38 +147,27 @@ public class NoticeDao {
 		dbUtil.close(null, stmt, conn);
 		return row;		
 	}
-	//SELECT : updateNoticeForm.jsp 공지 정보 조회
-	public Notice selectNoticeByNo(int noticeNo)  {
+	// SELECT : updateNoticeForm.jsp 공지 정보 조회
+	public Notice selectNotice(Notice notice)throws Exception{
 		Notice n = null;
-		Connection conn = null;
-		PreparedStatement stmt = null;
-		ResultSet rs = null;
-		
 		DBUtil dbUtil = new DBUtil();
-		try { //실행할거
-			conn = dbUtil.getConnection();
-			String sql = "SELECT notice_no noticeNo, notice_memo noticeMemo, updatedate, createdate"
+		Connection conn = dbUtil.getConnection();
+		String sql = "SELECT notice_no noticeNo, notice_memo noticeMemo, updatedate, createdate"
 					+ " FROM notice"
 					+ " WHERE notice_no=?";
-			stmt = conn.prepareStatement(sql);
-			stmt.setInt(1, noticeNo);
-			rs = stmt.executeQuery();
-			while(rs.next()) {
-				n = new Notice();
-				n.setNoticeNo(rs.getInt("noticeNo"));
-				n.setNoticeMemo(rs.getString("noticeMemo"));
-				n.setUpdatedate(rs.getString("updatedate"));
-				n.setCreatedate(rs.getString("createdate"));
-			}
-		} catch(Exception e) { //예외발생한다면 에러메시지표시
-			e.printStackTrace();
-		} finally { //예외발생해도 무조건 실행
-			try {
-				dbUtil.close(null, stmt, conn);
-			} catch(Exception e) {
-				e.printStackTrace();
-			}
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setInt(1, notice.getNoticeNo());
+		ResultSet rs = stmt.executeQuery();
+		while(rs.next()) {
+			n = new Notice();
+			n.setNoticeNo(rs.getInt("noticeNo"));
+			n.setNoticeMemo(rs.getString("noticeMemo"));
+			n.setUpdatedate(rs.getString("updatedate"));
+			n.setCreatedate(rs.getString("createdate"));
 		}
-		return n;		
+		
+		dbUtil.close(rs, stmt, conn);
+		return n;
 	}
+
 }

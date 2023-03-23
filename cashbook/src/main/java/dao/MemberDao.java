@@ -61,7 +61,7 @@ public class MemberDao {
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		
-		try { //실행할거
+		try { //실행할거tjrpw
 			DBUtil dbUtil = new DBUtil();
 			conn = dbUtil.getConnection();
 			

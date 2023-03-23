@@ -3,7 +3,7 @@
 <%@ page import = "dao.*" %>
 <%@ page import = "java.util.*"%>
 <%
-	//c
+//c
 	Member loginMember = (Member)session.getAttribute("loginMember");
 	if(loginMember == null || loginMember.getMemberLevel() < 1){ // 세션 정보가 없거나, 세션에 저장된 멤버 레베이 1보다 작은 경우
 		response.sendRedirect(request.getContextPath()+"/loginForm.jsp");

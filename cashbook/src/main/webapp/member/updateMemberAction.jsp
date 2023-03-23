@@ -102,10 +102,7 @@
 			<div class="search-toggle-icon dw dw-search2" data-toggle="header_search"></div>
 			<div class="header-search">
 				<form>
-					<div class="form-group mb-0">
-						<i class="dw dw-search2 search-icon"></i>
-						<input type="text" class="form-control search-input" placeholder="Search Here">
-					</div>
+					<div class="form-group mb-0"></div>
 				</form>
 			</div>
 		</div>
@@ -167,23 +164,30 @@
 							<span class="micon dw dw-user1"></span><span class="mtext">마이페이지</span>
 						</a>
 					</li>
-					<li>
+					<li class="dropdown">
 						<%
 							if(loginMember.getMemberLevel() > 0) {
 						%>
-								<a href="<%=request.getContextPath()%>/admin/adminMain.jsp" class="dropdown-toggle no-arrow">
-									<span class="micon dw dw-user1"></span><span class="mtext">관리자페이지</span>
-								</a>
+						<a href="javascript:;" class="dropdown-toggle">
+							<span class="micon dw dw-user-13"></span><span class="mtext">관리자페이지</span>
+						</a>
 						<%	
 							}
 						%>
-					</li>				
+						<ul class="submenu">
+							<li><a href="<%=request.getContextPath()%>/admin/adminMain.jsp">메인</a></li>
+							<li><a href="<%=request.getContextPath()%>/admin/member/memberList.jsp">회원관리</a></li>
+							<li><a href="<%=request.getContextPath()%>/admin/notice/noticeList.jsp">공지사항관리</a></li>
+							<li><a href="<%=request.getContextPath()%>/admin/comment/helpListAll.jsp">고객센터관리</a></li>
+							<li><a href="<%=request.getContextPath()%>/admin/category/categoryList.jsp">카테고리관리</a></li>						
+						</ul>
+					</li>						
 				</ul>
 			</div>
 		</div>
 	</div>
-	<div class="mobile-menu-overlay"></div>
 	<!--  메인 페이지 시작 -->
+	<div class="mobile-menu-overlay"></div>
 	<div class="main-container">
 		<div class="pd-ltr-20 xs-pd-20-10">
 			<div class="min-height-200px">
@@ -206,13 +210,12 @@
 				</div>
 				<!--  메인페이지 상세내용 -->
 				<div class="pd-20 card-box mb-30">
-					<span>내 정보 변경에 성공했습니다.</span>
+					<h4 class="text-blue h4">내 정보 변경에 성공했습니다.</h4>
 					<div>
-						<a href="<%=request.getContextPath()%>/member/memberPage.jsp">내 정보로 돌아가기</a>
+						<a href="<%=request.getContextPath()%>/member/memberPage.jsp">마이페이지로 돌아가기</a>
 					</div>
 				</div>
-			</div>
-				
+			</div>				
 			<!--  부트스트랩 디자이너 링크 -->
 			<div class="footer-wrap pd-20 mb-20 card-box">
 				DeskApp - Bootstrap 4 Admin Template By <a href="https://github.com/dropways" target="_blank">Ankit Hingarajiya</a>
